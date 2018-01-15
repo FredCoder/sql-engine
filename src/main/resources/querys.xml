@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="sql.xsd">
+ 
+  <select key="getTest" parameterType="String" author="chen_jian" resultType="xxxxx">
+     <db>
+        <url>xxx</url>
+        <type>mysql</type>
+        <userName>xxx</userName>
+        <passWord>xxx</passWord>
+     </db>
+    <sql><![CDATA[select * from t_user]]></sql>
+    <trim prefix="where" >
+      <if test="#name!=null and #cj!=null" prefix="and">
+        <exp><![CDATA[name=#{name} and xx=xx]]></exp>
+      </if>
+  
+    </trim>
+    <order value="desc">
+      <exp><![CDATA[ 123]]></exp>
+    </order>
+  </select>
+  
+  <select key="getCorporateBusinessLicence" des="获取法人营业执照">
+    <sql><![CDATA[
+   select
+	SQYMC     --企业名称:
+	,SZCH     --注册号:
+	,SSCJYCS  --经营场所
+	,SFZRXM   --负责人
+	,SQYLX    --企业类型:
+	,SZYFW    --业务范围: 
+	,DCLRQ    --成立日期:
+	,DJYQXQ   --有效期起:
+	,DJYQXZ   --有效期止:
+	,SDJJG    --发证机关:
+	,DHZRQ    --发证日期:
+	from whzw.SLDJ_QYXX_SMZJ t
+
+      ]]></sql>
+    <trim prefix="where">
+      <if test="#szch!=null" prefix="and">
+        <exp><![CDATA[t.SZCH=#{szch}]]></exp>
+      </if>
+       <if test="#sqymc!=null" prefix="and">
+        <exp><![CDATA[t.SQYMC like #{sqymc}%]]></exp>
+      </if>
+      <if test="#sfzrxm!=null" prefix="and">
+       <exp><![CDATA[t.sfzrxm =#{sfzrxm} ]]></exp>
+      </if>
+      <if test="#sjycs!=null" prefix="and">
+         <exp><![CDATA[t.SSCJYCS =#{sjycs} ]]></exp>
+      </if>
+      <if test="#sqylx!=null" prefix="and">
+      
+         <exp><![CDATA[t.SQYLX =#{sqylx} ]]></exp>
+      </if>
+      <if test="#djyxqq!=null and #djyxqz!=null" prefix="and">
+        <exp><![CDATA[t.DJYQXQ >=to_date( #{djyxqq} ,'yyyy/mm/dd') and  t.DJYQXZ <= to_date( #{djyxqz} ,'yyyy/mm/dd') ]]></exp>
+      </if>
+      <if test="#clrq!=null" prefix="and">
+        <exp><![CDATA[t.DCLRQ =to_date( #{clrq} ,'yyyy/mm/dd')]]></exp>
+      
+      </if>
+    </trim>
+
+  </select>
+</sqlXml>
