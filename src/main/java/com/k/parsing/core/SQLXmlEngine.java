@@ -18,11 +18,8 @@ import com.k.parsing.result.AnalyResults;
 import com.k.parsing.utils.XmlDom4jUitl;
 
 /**
- * TODO
  * 
- * @author Kevin.luo
- * @date 2018年1月11日 上午10:53:26
- * 
+ *
  */
 public class SQLXmlEngine {
 	private Logger logger = Logger.getLogger(SQLXmlEngine.class);
@@ -87,7 +84,5 @@ public class SQLXmlEngine {
 		AnalyResults resl = SQLContext.getContext("getCorporateBusinessLicence", map);
 
 		System.out.println(resl.getSql());
-
 	}
-
 }

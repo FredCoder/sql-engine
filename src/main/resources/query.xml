@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sqlXml>
-  <select key="123"  author="chen_jian" >
-    <db>
-      <url><![CDATA[xxxxxx]]></url>
-      <type><![CDATA[mysql]]></type>
-      <userName><![CDATA[test]]></userName>
-      <passWord><![CDATA[aaaa]]></passWord>
-    </db>
-    <sql><![CDATA[select * from t_user]]></sql>
-    <trim prefix="where">
-      <if test="#name!=null">
-        <exp><![CDATA[name=#{name}]]></exp>
-      </if>
-      <if test="#name!=22">
-        <exp><![CDATA[name=#{name}]]></exp>
-      </if>
-    </trim>
-    <order value="desc">
-      <exp><![CDATA[ myDB]]></exp>
-    </order>
-  </select>
+	<select key="123" author="chen_jian">
+		<db>
+			<url><![CDATA[xxxxxx]]></url>
+			<type><![CDATA[mysql]]></type>
+			<userName><![CDATA[test]]></userName>
+			<passWord><![CDATA[aaaa]]></passWord>
+		</db>
+		<sql><![CDATA[select * from t_user]]></sql>
+		<trim prefix="where">
+			<if test="#name!=null">
+				<exp><![CDATA[name=#{name}]]></exp>
+			</if>
+			<if test="#name!=22">
+				<exp><![CDATA[name=#{name}]]></exp>
+			</if>
+		</trim>
+		<order value="desc">
+			<exp><![CDATA[ myDB]]></exp>
+		</order>
+	</select>
 </sqlXml>

@@ -2,14 +2,19 @@ package com.k.parsing.command;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
-@XStreamAlias(value="order")
-//@XStreamConverter(value=ToAttributedValueConverter.class, strings={"exp"})
+
+/**
+ * 
+ * 
+ */
+@XStreamAlias(value = "order")
 public class OrderCommand {
+
 	@XStreamAsAttribute
 	private String value;
+
 	private String exp;
+
 	public String getValue() {
 		return value;
 	}
@@ -25,5 +30,4 @@ public class OrderCommand {
 	public void setExp(String exp) {
 		this.exp = exp;
 	}
-
 }

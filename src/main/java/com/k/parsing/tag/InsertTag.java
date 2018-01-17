@@ -1,17 +1,12 @@
-/**
- * 
- */
 package com.k.parsing.tag;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
- * TODO
  * 
- * @author Kevin.luo
- * @date 2018年1月11日 上午10:00:14
- * 
+ * @author Fren
+ *
  */
 @XStreamAlias(value = "insert")
 public class InsertTag extends CommTag {

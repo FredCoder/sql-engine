@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.k.parsing.template;
 
 import java.util.ArrayList;
@@ -11,11 +8,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
- * TODO
  * 
- * @author Kevin.luo
- * @date 2018年1月11日 上午9:49:52
- * 
+ *
  */
 @XStreamAlias(value="sqlXml")
 public class SqlConFigXml {

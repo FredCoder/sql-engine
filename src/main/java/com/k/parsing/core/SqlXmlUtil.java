@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.k.parsing.core;
 
 import java.io.BufferedOutputStream;
@@ -24,10 +21,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 /**
  * 
- * 
- * @author Kevin.luo
- * @date 2018年1月11日 上午9:05:57
- * 
+ *
  */
 public class SqlXmlUtil {
 	private static XStream xstream = null;
@@ -76,9 +70,7 @@ public class SqlXmlUtil {
 	 * @return
 	 */
 	public static String sqlXMLTemplate(SqlConFigXml xml) {
-
 		return xstream.toXML(xml);
-
 	}
 
 	/**
@@ -109,36 +101,27 @@ public class SqlXmlUtil {
 	 * @param xml
 	 */
 	public static void CreateSQLXmlFile(SqlConFigXml xml) {
-
 		String xmlstr = xstream.toXML(xml);
 		// 生成xml;
 		BufferedOutputStream Buff = null;
 		FileOutputStream fs = null;
 
 		try {
-
-			// System.getProperty("user.dir") 得到项目路径+src 就可以得到类路径
-			// paths=System.getProperty("user.dir")+"/src/"+xmlPath;//在类路径下生成的文件会自动编译出到class文件夹下
 			System.out.println("生成SQL配置文件为：" + xmlPath);
 			fs = new FileOutputStream(xmlPath);
 
 			Buff = new BufferedOutputStream(fs);
 			Buff.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes("utf-8"));
-			// Buff.write("<!--导入文件的值对象配置 -->\n".getBytes("utf-8"));
 			Buff.write(xmlstr.getBytes("utf-8"));
 			Buff.flush();
 			Buff.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-
 			Close(Buff, fs);
 		}
-
 	}
 
 	/**
@@ -159,7 +142,6 @@ public class SqlXmlUtil {
 				fs.close();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -15,27 +15,11 @@ import com.ql.util.express.ExpressRunner;
 
 /**
  * 
- * <p>
- * Title:JavaScript
- * </p>
- * <p>
- * Description: 运用脚本引擎进行表达式运算
- * </p>
- * <p>
- * Copyright: Copyright (c)
- * </p>
- * <p>
- * Company: XXXX
- * </p>
- * <p>
- * Date:2015年1月12日
- * </p>
- * 
- * @author CHEN_JIAN
- * @version 1.0
+ *
  */
 public class Express {
 	private static Logger logger = Logger.getLogger(Express.class);
+
 	private static ExpressRunner runner;
 
 	static {
@@ -49,7 +33,6 @@ public class Express {
 	}
 
 	public static Object MathValue(String exp) throws ScriptException {
-
 		ScriptEngine engine = factory.getEngineByName("JavaScript");
 		if (exp.equals(""))
 			return "";
@@ -66,7 +49,6 @@ public class Express {
 			logger.error("执行if指令表达式出现异常，表达式为[" + express + "]" + e.getMessage());
 			return false;
 		}
-
 	}
 
 	public static Object execute(String express, Map<String, Object> context) throws Exception {
@@ -94,14 +76,4 @@ public class Express {
 				+ "'";
 		System.out.println(sql);
 	}
-
-	// private void test(){
-	// String userName = "1' or '1'='1";String password = "123456";
-	// userName = StringEscapeUtils.escapeSql(userName);
-	// password = StringEscapeUtils.escapeSql(password);
-	// String sql = "SELECT COUNT(userId) FROM t_user WHERE userName='"+
-	// userName + "' AND password ='" + password + "'";
-	// System.out.println(sql);
-	// }
-
 }
