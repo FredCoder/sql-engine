@@ -19,7 +19,7 @@ public class DefaultCacheTest extends TestCase {
 	@Test
 	public void test() {
 		//fail("Not yet implemented");
-		Cache cache = DefaultCache.getInstance("test");
+		Cache cache = DefaultCache.createCache("test");
 		System.out.println(cache.getMaxCacheSize());
 		System.out.println(cache.getMaxLifetime());
 		
