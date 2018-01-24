@@ -122,7 +122,11 @@ public class DefaultCache<K, V> implements Cache<K, V> {
     
     
     
-    
+    /**
+     * 根据名字创建Cache对象。
+     * @param name
+     * @return
+     */
     @SuppressWarnings("rawtypes")
 	public static Cache createCache(String name) {
         // Get cache configuration from system properties or default (hardcoded) values
