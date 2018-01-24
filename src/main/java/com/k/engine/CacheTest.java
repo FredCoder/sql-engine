@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import com.k.engine.CacheTest.TestStr;
 import com.k.engine.cache.DefaultCache;
 import com.k.engine.cache.base.Cache;
 import com.k.engine.cache.base.Cacheable;
@@ -12,7 +13,7 @@ import com.k.engine.cache.exception.CannotCalculateSizeException;
 import com.k.engine.cache.utils.CacheSizes;
 
 public class CacheTest {
-	static Cache cache = DefaultCache.getInstance("cache");
+	static Cache<String, TestStr> cache = DefaultCache.createCache("cache");
 	
 	static List<String> keyData = new ArrayList<String>();
 	static List<String> selectArr = new ArrayList<String>();

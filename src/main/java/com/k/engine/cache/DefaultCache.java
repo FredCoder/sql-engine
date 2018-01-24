@@ -60,17 +60,6 @@ import com.k.engine.cache.utils.LinkedListNode;
  * @author Matt Tucker
  */
 public class DefaultCache<K, V> implements Cache<K, V> {
-	
-	@SuppressWarnings("rawtypes")
-	private static Cache instance = null;
-	
-	@SuppressWarnings("rawtypes")
-	public static Cache getInstance(String name){
-		if (instance == null){
-			instance = createCache(name);
-		}
-    	return instance;
-    }
 
     private static final String NULL_KEY_IS_NOT_ALLOWED = "Null key is not allowed!";
     private static final String NULL_VALUE_IS_NOT_ALLOWED = "Null value is not allowed!";
@@ -135,7 +124,7 @@ public class DefaultCache<K, V> implements Cache<K, V> {
     
     
     @SuppressWarnings("rawtypes")
-	private static Cache createCache(String name) {
+	public static Cache createCache(String name) {
         // Get cache configuration from system properties or default (hardcoded) values
         long maxSize = DEFAULT_MAX_CACHE_SIZE;
         long lifetime = DEFAULT_MAX_CACHE_LIFETIME;
