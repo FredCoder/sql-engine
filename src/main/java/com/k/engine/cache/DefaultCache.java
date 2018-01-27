@@ -430,7 +430,7 @@ public class DefaultCache<K, V> implements Cache<K, V> {
     public boolean containsKey(Object key) {
         checkNotNull(key, NULL_KEY_IS_NOT_ALLOWED);
         // First, clear all entries that have been in cache longer than the
-        // maximum defined age.
+        // maximum defined age. trunca't
         deleteExpiredEntries();
 
         return map.containsKey(key);
@@ -642,29 +642,27 @@ public class DefaultCache<K, V> implements Cache<K, V> {
         }
     }
 
+
     /**
-     * Removes objects from cache if the cache is too full. "Too full" is
-     * defined as within 3% of the maximum cache size. Whenever the cache is
-     * is too big, the least frequently used elements are deleted until the
-     * cache is at least 10% empty.
+     * 如果缓存太满, 则从缓存中移除对象。"太满 " 的定义是在最大缓存大小的3% 以内
+     * 每当缓存占用内存太多大, 最常用的元素将被删除, 直到至少余留10%的空间。
      */
     protected final void cullCache() {
-        // Check if a max cache size is defined.
+        // 检查是否定义了缓存大小。
         if (maxCacheSize < 0) {
             return;
         }
 
-        // See if the cache size is within 3% of being too big. If so, clean out
-        // cache until it's 10% free.
+        // 检查如果缓存大小达到设定上限的3%，则开始清除缓存，释放至上限的10%
         int desiredSize = (int)(maxCacheSize * .97);
         if (cacheSize >= desiredSize) {
-            // First, delete any old entries to see how much memory that frees.
+            // 首先, 删除所有旧条目, 查看释放了多少内存。
             deleteExpiredEntries();
             desiredSize = (int)(maxCacheSize * .90);
             if (cacheSize > desiredSize) {
                 long t = System.currentTimeMillis();
                 do {
-                    // Get the key and invoke the remove method on it.
+                    // 获缓存key并调用 remove 方法，移除该缓存数据。
                     remove(lastAccessedList.getLast().object);
                 } while (cacheSize > desiredSize);
                 t = System.currentTimeMillis() - t;
