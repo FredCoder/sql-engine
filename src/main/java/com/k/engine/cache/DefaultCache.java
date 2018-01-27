@@ -68,7 +68,6 @@ public class DefaultCache<K, V> implements Cache<K, V> {
     public static final int DEFAULT_MAX_CACHE_SIZE = 1024 * 256;
     public static final long DEFAULT_MAX_CACHE_LIFETIME = 6 * JiveConstants.HOUR;
     
-    //private static final boolean allowNull = JiveGlobals.getBooleanProperty("cache.allow.null", true);
     private static final boolean allowNull = Boolean.TRUE;
 
     private static final Logger Log = Logger.getLogger(DefaultCache.class);
