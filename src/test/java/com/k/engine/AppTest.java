@@ -18,13 +18,6 @@ public class AppTest extends TestCase {
     }
 
     /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite(){
-        return new TestSuite( CacheTest.class );
-    }
-
-    /**
      * Rigourous Test :-)
      */
     public void testApp(){

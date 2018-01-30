@@ -27,6 +27,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.k.engine.cache.base.Cache;
+import com.k.engine.cache.bean.KeyValue;
 import com.k.engine.cache.exception.CannotCalculateSizeException;
 import com.k.engine.cache.utils.CacheSizes;
 import com.k.engine.cache.utils.JiveConstants;
@@ -119,6 +120,11 @@ public class DefaultCache<K, V> implements Cache<K, V> {
      */
     private String name;
     
+    /**
+     * Cache文件补偿，处理过时、溢出的缓存数据。
+     */
+    private DefaultCacheIoPlus<K, V> defaultCacheIoPlus;
+    
     
     
     /**
@@ -153,6 +159,9 @@ public class DefaultCache<K, V> implements Cache<K, V> {
         // Our primary data structure is a HashMap. The default capacity of 11
         // is too small in almost all cases, so we set it bigger.
         map = new HashMap<K, DefaultCache.CacheObject<V>>(103);
+        
+        // 初始化文件补偿
+        defaultCacheIoPlus = new DefaultCacheIoPlus<K, V>();
 
         lastAccessedList = new com.k.engine.cache.utils.LinkedList<K>();
         ageList = new com.k.engine.cache.utils.LinkedList<K>();
@@ -211,6 +220,13 @@ public class DefaultCache<K, V> implements Cache<K, V> {
 
         DefaultCache.CacheObject<V> cacheObject = map.get(key);
         if (cacheObject == null) {
+
+        	// 如果高速缓存中没有存在数据，从本地缓存中读取
+            KeyValue<K, V> localkv = defaultCacheIoPlus.recycleTemp2Cache((K)key);
+            if (localkv != null){
+            	return localkv.getValue();
+            }
+            
             // The object didn't exist in cache, so increment cache misses.
             cacheMisses++;
             return null;
@@ -229,7 +245,8 @@ public class DefaultCache<K, V> implements Cache<K, V> {
         return cacheObject.object;
     }
 
-    @Override
+	@SuppressWarnings("unchecked")
+	@Override
     public synchronized V remove(Object key) {
         checkNotNull(key, NULL_KEY_IS_NOT_ALLOWED);
         DefaultCache.CacheObject<V> cacheObject = map.get(key);
@@ -237,6 +254,9 @@ public class DefaultCache<K, V> implements Cache<K, V> {
         if (cacheObject == null) {
             return null;
         }
+        // 将丢弃的数据，写成临时文件
+        defaultCacheIoPlus.recycleCache2Temp((K)key , cacheObject.object);
+        
         // remove from the hash map
         map.remove(key);
         // remove from the cache order list
@@ -604,7 +624,7 @@ public class DefaultCache<K, V> implements Cache<K, V> {
     }
 
     /**
-     * Clears all entries out of cache where the entries are older than the
+     * 清除缓存中已经过时的缓存
      * maximum defined age.
      */
     protected void deleteExpiredEntries() {

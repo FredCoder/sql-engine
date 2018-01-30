@@ -1,10 +1,7 @@
 package com.k.engine.cache;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import org.junit.After;
@@ -70,8 +67,6 @@ public class DefaultCacheTest {
 	@Test
 	public void test() {
 		// fail("Not yet implemented");
-		int missCount = 0;
-		int hitCount = 0;
 		long startTime = System.currentTimeMillis();
 		for (String key : keyData) {
 			cache.get(key);
