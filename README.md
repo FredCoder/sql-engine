@@ -6,7 +6,7 @@
 ### 待办列表
  - [ ] _SQL_ 结果匿名映射
  - [x] 添加 _DefaultCache_ 
- - [ ] 添加 _Cache_ 丢弃回收机制
+ - [x] 添加 _Cache_ 丢弃回收机制
  - [ ] 添加 _Druid_ 连接池
  - [ ] 移除 _xstream_ 使用原生 _XML_ 解析替代
 
